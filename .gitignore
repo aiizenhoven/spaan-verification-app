@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+*.xlsx
+*.xls
+*.csv
+.DS_Store
+streamlit_out.log
+streamlit_err.log
+.venv/
+venv/
