@@ -14,6 +14,7 @@ import datetime
 
 import streamlit as st
 import pandas as pd
+import streamlit_authenticator as stauth
 
 import parsers
 import engine
@@ -21,6 +22,38 @@ import aggregate
 import workbook_writer
 
 st.set_page_config(page_title="Spaan Verification Cost & Reconciliation", layout="wide")
+
+# ---------------------------------------------------------------------------
+# Login gate — credentials come from Streamlit secrets, never from the repo.
+# Locally: .streamlit/secrets.toml (gitignored). On Streamlit Community Cloud:
+# App settings -> Secrets.
+# ---------------------------------------------------------------------------
+def _to_plain_dict(value):
+    """Recursively convert Streamlit's read-only Secrets mapping to plain dicts,
+    since streamlit-authenticator mutates the credentials structure at runtime."""
+    if hasattr(value, "items"):
+        return {k: _to_plain_dict(v) for k, v in value.items()}
+    return value
+
+
+authenticator = stauth.Authenticate(
+    _to_plain_dict(st.secrets["credentials"]),
+    st.secrets["cookie"]["name"],
+    st.secrets["cookie"]["key"],
+    st.secrets["cookie"]["expiry_days"],
+)
+authenticator.login()
+
+if st.session_state.get("authentication_status") is False:
+    st.error("Username or password is incorrect.")
+    st.stop()
+elif st.session_state.get("authentication_status") is None:
+    st.warning("Please log in to continue.")
+    st.stop()
+
+with st.sidebar:
+    st.write(f"Signed in as **{st.session_state['name']}**")
+    authenticator.logout()
 
 SPAAN_CSS = """
 <style>

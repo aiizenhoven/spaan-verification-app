@@ -8,3 +8,4 @@ streamlit_out.log
 streamlit_err.log
 .venv/
 venv/
+.streamlit/secrets.toml

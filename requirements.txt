@@ -2,3 +2,4 @@ streamlit
 openpyxl
 pandas
 pdfplumber
+streamlit-authenticator
