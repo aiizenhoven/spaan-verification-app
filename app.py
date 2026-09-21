@@ -65,13 +65,12 @@ html, body, [class*="css"]  { font-family: 'Montserrat', sans-serif; }
     --shelduck: #E67E30; --cinnamon: #A8461F; --tobacco: #5C3220; --cement: #D9D5CF;
 }
 h1, h2, h3 { color: var(--navy) !important; font-weight: 700 !important; }
-.stApp { background-color: #FFFFFF; }
 [data-testid="stMetricValue"] { color: var(--navy); font-weight: 700; }
 .stButton>button {
-    background-color: var(--shelduck); color: white; font-weight: 700;
+    background-color: var(--shelduck); color: white !important; font-weight: 700;
     border-radius: 8px; border: none;
 }
-.stButton>button:hover { background-color: var(--cinnamon); color: white; }
+.stButton>button:hover { background-color: var(--cinnamon); color: white !important; }
 [data-testid="stSidebar"] { background-color: var(--navy); }
 [data-testid="stSidebar"] * { color: white !important; }
 .spaan-banner {

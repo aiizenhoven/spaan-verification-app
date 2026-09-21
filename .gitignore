@@ -9,3 +9,4 @@ streamlit_err.log
 .venv/
 venv/
 .streamlit/secrets.toml
+*.log
